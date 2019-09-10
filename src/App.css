@@ -1,0 +1,61 @@
+/* Main Colors 
+
+  Dark Gray             #6e6f72
+  Mediun Gray           #989BA5
+  Light Gray            #e6e3e1
+
+  ECG Yellow            #FFE500
+  CTA Yellow            #FFB60D
+  CTA Yellow Hover      #FECD59
+
+  ECG Blue Dark         #1d2939
+  ECG Blue Dark Flat    #1e3950
+  ECG Blue Accent       #4A779C
+  ECG Light Blue        #BCDBF5
+
+  White                 #FAFAFA
+  Orange                #ff570a
+
+*/
+
+/* Variables
+-----------------------*/
+
+:root {
+  --ECG-dark-blue: #1d2939;
+}
+
+
+
+/* Global styles 
+-----------------------*/
+
+html,
+body {
+  margin: 0;
+  height: 100vh;
+  background: #FAFAFA;
+  font-family: 'Roboto', Tahoma, Verdana, sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+#page-wrap {
+  /* Prevent sidebar from showing a scrollbar on page */
+  overflow: auto;
+}
+
+.content {
+  margin: 6em 3rem;
+}
+
+h1 {
+  color: var(--ECG-dark-blue);
+  font-family: 'Lato', Tahoma, Verdana, sans-serif;
+  font-weight: 700;
+}
+
+input {
+  border: 1px solid #aaa;
+}
+
