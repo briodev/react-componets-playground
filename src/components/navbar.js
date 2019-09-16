@@ -135,9 +135,9 @@ export default () => {
             </NavItems>
             <HamburgerWrapper>
               <SideMenu pageWrapId={"page-wrap"} outerContainerId={"App"} isOpen={ menuState }>
-                <Menu isOpen={ menuState }>
+                <Menu>
 
-                  <Link className="menu-item" to="/home" onClick={() => closeMenu() }>
+                  <Link className="menu-item" to="/" onClick={() => closeMenu() }>
                     Home
                   </Link>
                   

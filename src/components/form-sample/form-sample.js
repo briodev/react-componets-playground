@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components'
 
 export default () => {
+
+  const [formValid, setFormValid] = useState(false)
 
   const [firstName, setFirstName] = useState({
     value: '',
@@ -18,37 +21,56 @@ export default () => {
 
   const validate = () => {
 
-    if( firstName.touched && !firstName.value) {
+    if( firstName.pristine || firstName.touched) {
+      if(!firstName.value) {
         setFirstName(
           {
             ...firstName,
             error: "First name is required."
           }
         )
+        setFormValid(false)
+      }
     };
 
-    if( firstName.pristine && !firstName.value) {
-      setFirstName(
-        {
-          ...firstName,
-          error: "First name is required."
-        }
-      )
-  };
+    if( lastName.pristine || lastName.touched) {
+      if(!lastName.value) {
+        setLastName(
+          {
+            ...lastName,
+            error: "Last name is required."
+          }
+        )
+        setFormValid(false)
+      }
+    };
 
-    if( lastName.touched && !lastName.value) {
-      setLastName(
-        {
-          ...lastName,
-          error: "Last name is required."
-        }
-      )
-  };
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
     validate();
+    console.log(firstName, lastName)
+
+    const postData = {
+      firstName: firstName,
+      lastName: lastName 
+    }
+
+    const axiosConfig = {
+      headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          "Access-Control-Allow-Origin": "*",
+      }
+    }
+
+    axios.post('https://f2dgo9fr9f.execute-api.us-east-1.amazonaws.com/v1/interactions', postData, axiosConfig)
+      .then((res) => {
+        console.log("RESPONSE RECEIVED: ", res);
+      })
+      .catch((err) => {
+        console.log("AXIOS ERROR: ", err);
+      })
   }
 
   const handleBlur = (event) => {
@@ -60,17 +82,31 @@ export default () => {
         touched: true,
         pristine: false
       })
+
+      if(!value) {
+        setFirstName({
+          ...firstName,
+          error: 'First Name is required'
+        })
+      }
     }
-    if(!value) {
-      setFirstName({
-        ...firstName,
-        error: 'First Name is required'
+
+    if(field === 'lastName') {
+      setLastName({
+        ...lastName,
+        touched: true,
+        pristine: false
       })
+
+      if(!value) {
+        setLastName({
+          ...lastName,
+          error: 'Last Name is required'
+        })
+      }
     }
-    console.log(field)
   }
 
-  //console.log(firstName, lastName)
 
   return (
     <div>
@@ -96,17 +132,6 @@ export default () => {
             }
           )}
           onBlur = {event => handleBlur(event)}    
-          // onBlur={e => 
-          //   {
-          //   setFirstName(
-          //       {
-          //         ...firstName,
-          //         touched: true,
-          //         pristine: false
-          //       }
-          //     )
-          //   }
-          // }
         />
 
         <label htmlFor="lastName">
@@ -128,15 +153,9 @@ export default () => {
               error: ''
             }
           )}
-          onBlur={e => setLastName(
-            {
-              ...lastName,
-              touched: true,
-              pristine: false
-            }
-          )}
+          onBlur = {event => handleBlur(event)} 
         />
-        <Input type="submit" value="Submit" />
+        <Input type="submit" value="Submit"/>
       </Form>
     </div>
   )
