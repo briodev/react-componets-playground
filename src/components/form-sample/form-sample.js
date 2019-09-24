@@ -52,21 +52,24 @@ export default () => {
     validate();
     console.log(firstName, lastName)
 
-    const postData = {
-      firstName: firstName,
-      lastName: lastName 
-    }
+    const postData = JSON.stringify({
+      firstName: firstName.value,
+      lastName: lastName.value,
+      phone: "123 123 1234",
+      email: "test@test.com"
+    })
 
     const axiosConfig = {
       headers: {
           'Content-Type': 'application/json;charset=UTF-8',
-          "Access-Control-Allow-Origin": "*",
+          // 'Access-Control-Request-Method': "POST",
+          // 'Access-Control-Allow-Headers': "true"
       }
     }
 
-    axios.post('https://f2dgo9fr9f.execute-api.us-east-1.amazonaws.com/v1/interactions', postData, axiosConfig)
+    axios.post('https://8oqtsuqbo7.execute-api.us-east-1.amazonaws.com/v1/interactions', postData, axiosConfig)
       .then((res) => {
-        console.log("RESPONSE RECEIVED: ", res);
+        console.log("RESPONSE RECEIVED: ", res, res.data);
       })
       .catch((err) => {
         console.log("AXIOS ERROR: ", err);

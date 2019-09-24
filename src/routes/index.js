@@ -7,6 +7,8 @@ import CenteredDiv from '../components/CenteredDiv';
 import FormSample from '../components/form-sample/form-sample'
 import ReactStrapForm from '../components/reactstrap-form/form'
 import ReactFinalForm from '../components/final-form-example/form'
+import StateTest from '../components/StateTest'
+import FilterTest from '../components/listFilters/filter-example-1'
 
 export default () => (
   <Router>
@@ -21,5 +23,7 @@ export default () => (
     <FormSample path="form-sample"  />
     <ReactStrapForm path="reactstrap-form"  />
     <ReactFinalForm path="react-final-form"  />
+    <StateTest path="state-test"  />
+    <FilterTest path="filter-test"  />
   </Router>
 )
